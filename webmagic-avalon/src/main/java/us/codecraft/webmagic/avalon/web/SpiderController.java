@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author code4crafter@gmail.com
  */
-@Controller("spider")
+@Controller
 @RequestMapping("spider")
 public class SpiderController {
 
