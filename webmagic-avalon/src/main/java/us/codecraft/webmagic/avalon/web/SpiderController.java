@@ -3,6 +3,7 @@ package us.codecraft.webmagic.avalon.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import us.codecraft.forger.property.Inject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("spider")
 public class SpiderController {
+
+    @Inject
+    private String inject;
 
     @RequestMapping("create")
     @ResponseBody
