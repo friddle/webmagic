@@ -45,7 +45,7 @@ public class ProxyUtils {
 		// other way to get local IP
 		Enumeration<InetAddress> localAddrs;
 		try {
-			// modify your network interface name
+			// modify your network Interface name
 			NetworkInterface ni = NetworkInterface.getByName(networkInterface);
 			if (ni == null) {
 				return;

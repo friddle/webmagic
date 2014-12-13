@@ -17,7 +17,7 @@ import java.util.List;
  * @author code4crafter@gmail.com <br>
  */
 @TargetUrl("http://news.163.com/\\d+/\\d+/\\d+/\\w+*.html")
-public class News163 implements MultiPageModel {
+public class News163 implements MultiPageModel{
 
     @ExtractByUrl("http://news\\.163\\.com/\\d+/\\d+/\\d+/([^_]*).*\\.html")
     private String pageKey;

@@ -12,12 +12,22 @@ public class IpEntity {
 	public String user;
 	public String passwd;
 	public String port;
-	public synchronized void addblockUrl(String url)
+	public int state;
+
+	public class IpState
+	{
+		public static final int new_ip=1;
+		public static final int work=2;
+		public static final int failed=4;
+		public static final int timeout=5;
+		public static final int dead=4;
+	}
+
+	public synchronized void addblockUrl(String hostname)
 	{
 
 	}
-
-	public IpEntity(String ip)
+	public IpEntity(String ip,String user,String passwd,String port)
 	{
 
 	}

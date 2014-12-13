@@ -32,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * A spider contains four modules: Downloader, Scheduler, PageProcessor and
  * Pipeline.<br>
  * Every module is a field of Spider. <br>
- * The modules are defined in interface. <br>
+ * The modules are defined in Interface. <br>
  * You can customize a spider with various implementations of them. <br>
  * Examples: <br>
  * <br>
@@ -129,6 +129,13 @@ public class Spider implements Runnable, Task {
         this.site = pageProcessor.getSite();
         this.startRequests = pageProcessor.getSite().getStartRequests();
     }
+
+	public Spider(PageProcessor pageProcessor,Site site)
+	{
+		this.pageProcessor=pageProcessor;
+		this.site=site;
+		this.startRequests=site.getStartRequests();
+	}
 
     /**
      * Set startUrls of Spider.<br>

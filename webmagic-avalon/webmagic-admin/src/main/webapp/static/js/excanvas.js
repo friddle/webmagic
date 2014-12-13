@@ -563,7 +563,7 @@ if (!document.createElement('canvas').getContext) {
   }
 
   /**
-   * This class implements CanvasRenderingContext2D interface as described by
+   * This class implements CanvasRenderingContext2D Interface as described by
    * the WHATWG.
    * @param {HTMLElement} surfaceElement The element that the 2D context should
    * be associated with

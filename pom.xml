@@ -13,33 +13,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-version>4.0.0.RELEASE</spring-version>
-
     </properties>
     <artifactId>webmagic-parent</artifactId>
     <name>webmagic-parent</name>
-    <description>
-        A crawler framework. It covers the whole lifecycle of crawler: downloading, url management, content
-        extraction and persistent. It can simply the development of a specific crawler.
-    </description>
-    <url>https://github.com/code4craft/webmagic/</url>
-    <developers>
-        <developer>
-            <id>code4craft</id>
-            <name>Yihua huang</name>
-            <email>code4crafer@gmail.com</email>
-        </developer>
-        <developer>
-            <id>yuany</id>
-            <name>Ligang Yao</name>
-            <email>ligang.yao@answers.com</email>
-        </developer>
-    </developers>
-    <scm>
-        <connection>scm:git:git@github.com:code4craft/webmagic.git</connection>
-        <developerConnection>scm:git:git@github.com:code4craft/webmagic.git</developerConnection>
-        <url>git@github.com:code4craft/webmagic.git</url>
-      <tag>HEAD</tag>
-  </scm>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -54,6 +30,8 @@
         <module>webmagic-selenium</module>
         <module>webmagic-saxon</module>
         <module>webmagic-samples</module>
+        <module>webmagic-server</module>
+        <module>webmagic-client</module>
         <!--<module>webmagic-avalon</module>-->
     </modules>
 
@@ -274,43 +252,8 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- GPG -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>sonatype-nexus-staging</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>sonatype-nexus-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>sonatype-nexus-staging</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
         </profile>
     </profiles>
 </project>
