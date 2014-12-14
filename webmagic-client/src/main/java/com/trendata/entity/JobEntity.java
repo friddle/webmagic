@@ -1,4 +1,4 @@
-package com.trendata.Entity;
+package com.trendata.entity;
 
 /**
  * two type,one type is processname

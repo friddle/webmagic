@@ -1,14 +1,14 @@
 package com.trendata.Work;
 
 
-import com.trendata.Constant.HashFunc;
-import com.trendata.Constant.HttpFunc;
-import com.trendata.Entity.WorkEntity;
-import com.trendata.Entity.WorkStateEntity;
-import com.trendata.Exception.StateException;
-import com.trendata.Interface.DistributionScheduler;
-import com.trendata.Process.DistributionProcess;
-import com.trendata.Spider.DistributionSpider;
+import com.trendata.util.HashFunc;
+import com.trendata.util.HttpFunc;
+import com.trendata.entity.WorkEntity;
+import com.trendata.entity.WorkStateEntity;
+import com.trendata.exceptions.StateException;
+import com.trendata.distribution.DistributionScheduler;
+import com.trendata.distribution.DistributionProcess;
+import com.trendata.distribution.DistributionSpider;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;

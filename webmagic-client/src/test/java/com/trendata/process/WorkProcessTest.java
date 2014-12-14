@@ -1,6 +1,6 @@
-package com.trendata.Process;
+package com.trendata.process;
 
-import com.trendata.Exception.StateException;
+import com.trendata.exceptions.StateException;
 import com.trendata.Work.WorkProcess;
 import org.junit.Before;
 import org.junit.Test;

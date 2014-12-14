@@ -1,4 +1,4 @@
-package com.trendata.Pipeline;
+package com.trendata.pipeline;
 
 import us.codecraft.webmagic.Task;
 

@@ -1,4 +1,4 @@
-package com.trendata.Constant;
+package com.trendata.util;
 
 /**
  * Created by friddle on 12/11/14.

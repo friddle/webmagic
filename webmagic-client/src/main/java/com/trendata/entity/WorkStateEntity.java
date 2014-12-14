@@ -1,4 +1,4 @@
-package com.trendata.Entity;
+package com.trendata.entity;
 
 /**
  * Created by friddle on 12/10/14.

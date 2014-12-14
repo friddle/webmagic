@@ -1,4 +1,4 @@
-package com.trendata.Exception;
+package com.trendata.exceptions;
 
 /**
  * Created by friddle on 12/10/14.
@@ -6,6 +6,14 @@ package com.trendata.Exception;
 public class StateException extends Exception{
 	public int states;
 	public String errormessage;
+
+
+    public static class StateExceptionStatus
+    {
+        public int proxyfailed=1;
+        public int databasefailed=2;
+        public int httpfailed=3;
+    }
 
 	public StateException(int state,String errormessage)
 	{

@@ -1,4 +1,4 @@
-package com.trendata.Pipeline;
+package com.trendata.pipeline;
 
 /**
  * Created by friddle on 12/10/14.

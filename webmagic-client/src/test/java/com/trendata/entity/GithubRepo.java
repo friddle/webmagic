@@ -1,4 +1,4 @@
-package com.trendata.Entity;
+package com.trendata.entity;
 
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.HasKey;

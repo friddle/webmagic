@@ -1,9 +1,9 @@
-package com.trendata.Interface;
+package com.trendata.configuration;
 
 /**
  * Created by friddle on 12/10/14.
  */
-public interface SQLSetting {
+public interface DatabaseSetting {
 	public String getHost();
 	public String getUserName();
 	public String getPassword();

@@ -1,4 +1,4 @@
-package com.trendata.Constant;
+package com.trendata.util;
 
 import org.apache.http.impl.client.HttpClientBuilder;
 

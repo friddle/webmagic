@@ -1,6 +1,7 @@
-package com.trendata.Process;
+package com.trendata.process;
 
-import com.trendata.Pipeline.OrmPipeline;
+import com.trendata.distribution.DistributionProcess;
+import com.trendata.pipeline.OrmPipeline;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;

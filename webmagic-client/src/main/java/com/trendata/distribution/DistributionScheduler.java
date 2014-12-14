@@ -1,4 +1,4 @@
-package com.trendata.Interface;
+package com.trendata.distribution;
 
 import java.sql.Timestamp;
 
