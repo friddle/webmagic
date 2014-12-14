@@ -6,8 +6,8 @@ package com.trendata.Queus.Entity;
  * Created by friddle on 12/10/14.
  */
 public class JobEntity {
+	public String hostname;
 	public String url;
-	public String hash;
 	public String pipename;
 	public String entityname;
 	public String processname;

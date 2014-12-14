@@ -2,6 +2,7 @@ package com.trendata.Queus.Entity;
 
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 /**
  * Created by friddle on 12/10/14.
@@ -14,5 +15,6 @@ import java.sql.Timestamp;
 		public String host_name;
 		public Timestamp last_time;
 		public int threadnums;
+		public Map<String,Timestamp> blocklists;
 	}
 
