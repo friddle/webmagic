@@ -1,50 +1,31 @@
 package com.trendata.Queus;
 
-import com.trendata.Queus.Entity.Machine;
+import com.trendata.Queus.Entity.WorkEntity;
 import com.trendata.Queus.Entity.WorkStateEntity;
 import com.trendata.Queus.Interface.JobQueueInterface;
+import com.trendata.Queus.Interface.UrlRuleInterface;
+import com.trendata.Queus.Interface.WorkQueuePipeline;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 /**
  * Created by friddle on 12/10/14.
  * the WorkQueues contains different kind of type of url to one hostname
- * when client invoke the Interface ,so url add to distinct WorkQueues,And WorkQueues keep it,urlcrawl status.use time,hash.....
- * and also judge the class by grep the hostname to choose the class
- *
+ * when client invoke the Interface ,so url add to distinct WorkQueues,And WorkQueues keep it,url,crawl status.use time,hash.....
+ * do not let the upper to modify the WorkQueue
  */
 public class WorkQueues {
 	public static ConcurrentHashMap<String,WorkQueues> mQueues;
 	public String hostname;
 	static Logger logger= Logger.getLogger("WorkQueues");
 	public JobQueueInterface job;
-	public ConcurrentHashMap<String,Machine> unsupport_list;
-
-	public static boolean addJobs(String hostname,String url,int states)
-	{
-		if(mQueues.contains(hostname)==false)
-		{
-			try
-			{
-				mQueues.put(hostname,new WorkQueues(hostname));
-			}
-			catch(Exception e)
-			{
-				logger.info(e.getStackTrace().toString());
-				logger.info("can't put to queues");
-			}
-		}
-		if(states== WorkStateEntity.faild)
-		{
-			mQueues.get(hostname).addFailedJobs(url);
-		}
-		else
-		{
-			mQueues.get(hostname).addJobs(url);
-		}
-		return true;
-	}
+	public WorkQueuePipeline pipeline;
+	public UrlRuleInterface rules;
+	public ConcurrentHashMap<String,WorkEntity> worklist;
 
 	/**
 	 * @param hostname
@@ -60,35 +41,45 @@ public class WorkQueues {
 	{
 		this.hostname=hostname;
 		this.job=JobQueues.getJobQueues();
+		this.pipeline=new WorkQueueDatabase();
 	}
 
-	public synchronized  void clearStates()
-	{
 
+	public synchronized void clearJobs()
+	{
+		worklist.clear();
 	}
 
-	public synchronized  void setUnsupportedMachine()
+	public void setUnsupportedMachine(String machinehost)
 	{
+		MachineList.setBlockList(this.hostname,machinehost);
+	}
 
+
+
+	public synchronized void addNewJob(String url)
+	{
+		WorkEntity mEntity=new WorkEntity();
+		mEntity.processname= rules.getProcessName(url);
+		mEntity.pipename= rules.getPipelineName(url);
+		mEntity.entityname= rules.getEntityName(url);
+		mEntity.states= WorkStateEntity.begin;
+		mEntity.timestamp=new Timestamp(new Date().getTime());
+		mEntity.hostname=this.hostname;
+		mEntity.url=url;
+		worklist.put(url,mEntity);
+		this.job.pushEntity(mEntity);
 	}
 
 
 	/**
-	 * how to keep failed
-	 *
+	 * if the url work success,just remove it from hash and get it to pipeline
+	 * else just change the state and keep it in the lists
+	 * when failed times out of the max,just keep it be dead and aosl linked to pipeline
+	 * @param entity
 	 */
-	public synchronized  boolean addJobs(String url)
+	public synchronized void checkResultJobs(List<WorkEntity> entity)
 	{
-		return true;
-	}
 
-	/**
-	 * remeber try times set
-	 * @return
-	 */
-	public synchronized boolean addFailedJobs(String url)
-	{
-		return true;
 	}
-
 }

@@ -24,6 +24,14 @@ public class ClientProvider {
 		return "";
 	}
 
+
+	@ResponseBody
+	@RequestMapping(value="/jobResults")
+	public String jobResults(HttpServletRequest request)
+	{
+		return "";
+	}
+
 	@RequestMapping(value="/getDefaultSettings")
 	@ResponseBody
 	public String getDefaultSettings(HttpServletRequest request)

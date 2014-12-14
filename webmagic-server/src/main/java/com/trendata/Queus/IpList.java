@@ -1,7 +1,6 @@
 package com.trendata.Queus;
 
 import com.trendata.Queus.Entity.IpEntity;
-import com.trendata.Queus.Interface.IpListInterface;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -11,32 +10,25 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * keep refresh the ip list
  * Created by friddle on 12/10/14.
  */
-public class IpList implements IpListInterface{
-	public ConcurrentLinkedQueue ipListQueue;
+public class IpList {
+	public static volatile ConcurrentLinkedQueue ipListQueue;
 
-	@Override
-	public boolean addIp(IpEntity ip) {
+	public static boolean addIp(IpEntity ip) {
 		return false;
 	}
 
-	@Override
-	public String getAvaiableIp(String url) {
+	public static String getAvaiableIp(String url) {
 		return null;
 	}
 
-	@Override
-	public String setIpBlockUrl(String url, String blockip) {
+	public static String setIpBlockUrl(String url, String blockip) {
 		return null;
 	}
-
-	@Override
-	public boolean initIps(List<IpEntity> ipconfigs)
+	public static boolean initIps(List<IpEntity> ipconfigs)
 	{
 		return true;
 	}
-
-	@Override
-	public boolean refreshIps(List<IpEntity> ipconfigs)
+	public static boolean refreshIps(List<IpEntity> ipconfigs)
 	{
 		return true;
 	}

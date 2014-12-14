@@ -19,3 +19,9 @@ provide function:
 3.  set configuration to system
 
 
+Think
+------------------
+the Work to one Configuration Entity
+The Work contains the all the info,such as the available ip,or the avaiable machines
+
+
