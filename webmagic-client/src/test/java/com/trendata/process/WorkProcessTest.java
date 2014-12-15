@@ -1,7 +1,7 @@
 package com.trendata.process;
 
 import com.trendata.exceptions.StateException;
-import com.trendata.Work.WorkProcess;
+import com.trendata.work.WorkProcess;
 import org.junit.Before;
 import org.junit.Test;
 import us.codecraft.webmagic.Site;

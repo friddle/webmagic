@@ -3,12 +3,13 @@ package com.trendata.distribution;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * provide function to processObject(object,type)
+ * provide function to addNewUrl()
+ * provide function to addFailedUrl()
  * Created by friddle on 12/10/14.
  */
 public abstract class DistributionProcess implements PageProcessor {
@@ -31,18 +32,13 @@ public abstract class DistributionProcess implements PageProcessor {
 	{
 		this.scheduler=scheduler;
 	}
-
     public void addNewDistributionUrl(String url)
 	{
 		this.scheduler.addNewDistributionUrl(url);
 	}
-	public void addFinishDistributionUrl(String url)
-	{
-		this.scheduler.addFinishDistributionUrl(url, new Timestamp(Calendar.getInstance().getTimeInMillis()));
-	}
 	public void onfailed(String url,String message,int code)
 	{
-		this.scheduler.addFailedDistributionUrl(url,message,code);
+		this.scheduler.updateErrorToFinshUrl(url,code,message);
 	}
 	public void onfinish()
 	{

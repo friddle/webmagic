@@ -1,14 +1,13 @@
-package com.trendata.Work;
+package com.trendata.work;
 
 
-import com.trendata.util.HashFunc;
-import com.trendata.util.HttpFunc;
+import com.trendata.distribution.DistributionProcess;
+import com.trendata.distribution.DistributionScheduler;
 import com.trendata.entity.WorkEntity;
 import com.trendata.entity.WorkStateEntity;
 import com.trendata.exceptions.StateException;
-import com.trendata.distribution.DistributionScheduler;
-import com.trendata.distribution.DistributionProcess;
-import com.trendata.distribution.DistributionSpider;
+import com.trendata.util.HashFunc;
+import com.trendata.util.HttpFunc;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;
@@ -73,7 +72,7 @@ public class WorkProcess implements DistributionScheduler{
 			{
 				mSite.addStartUrl(url);
 			}
-		    DistributionSpider.create(mSite, pipeobject, centity).run();
+		    //DistributionSpider.create(mSite, pipeobject, centity).run();
 		}
 		catch(Exception e)
 		{

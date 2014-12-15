@@ -7,5 +7,5 @@ import java.util.Map;
  */
 public interface DistributionPipeline{
     public void process(Object object,Class type) throws Exception;
-    public void setDatabase(Map<String,String> maps);
+    public void setConfiguration(Map<String,String> maps);
 }
