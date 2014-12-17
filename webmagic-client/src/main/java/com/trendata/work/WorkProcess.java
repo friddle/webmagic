@@ -4,7 +4,7 @@ package com.trendata.work;
 import com.trendata.distribution.DistributionProcess;
 import com.trendata.distribution.DistributionScheduler;
 import com.trendata.entity.WorkEntity;
-import com.trendata.entity.WorkStateEntity;
+import com.trendata.entity.WorkState;
 import com.trendata.exceptions.StateException;
 import com.trendata.util.HashFunc;
 import com.trendata.util.HttpFunc;
@@ -16,13 +16,13 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import java.lang.reflect.Constructor;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
 
 /**
  * two type,if variable use process you can't construct with any paramater,
  * the one type must contains process
- * the other type must contains process and pipeline
  */
 
 /**
@@ -32,9 +32,9 @@ import java.util.logging.Logger;
  */
 
 public class WorkProcess implements DistributionScheduler{
-	static ConcurrentLinkedQueue<WorkProcess> list=new ConcurrentLinkedQueue();
-	ConcurrentLinkedQueue<WorkEntity> newurls=new ConcurrentLinkedQueue<WorkEntity>();
-	ConcurrentLinkedQueue<WorkEntity> finshurls=new ConcurrentLinkedQueue<WorkEntity>();
+	static ConcurrentLinkedQueue<WorkProcess> workprocess=new ConcurrentLinkedQueue();
+	volatile ConcurrentLinkedQueue<WorkEntity> newurls=new ConcurrentLinkedQueue<WorkEntity>();
+	volatile ConcurrentHashMap<String,WorkEntity> finishurls=new ConcurrentHashMap<String,WorkEntity>();
 
 	public void createSpiderByProcess(String processname,List<String> urls,Site mSite) throws StateException
 	{
@@ -55,7 +55,7 @@ public class WorkProcess implements DistributionScheduler{
 		catch(Exception e)
 		{
 			logger.info(e.getMessage());
-			throw new StateException(WorkStateEntity.unsupport,e.getMessage().toString()+" not found");
+			throw new StateException(WorkState.unsupport,e.getMessage().toString()+" not found");
 		}
 	}
 
@@ -77,9 +77,8 @@ public class WorkProcess implements DistributionScheduler{
 		catch(Exception e)
 		{
 			logger.info(e.getMessage());
-			throw new StateException(WorkStateEntity.unsupport,e.getMessage().toString()+" not found");
+			throw new StateException(WorkState.unsupport,e.getMessage().toString()+" not found");
 		}
-
 	}
 
 
@@ -94,14 +93,25 @@ public class WorkProcess implements DistributionScheduler{
 		WorkEntity mEntity=new WorkEntity();
 		mEntity.url=url;
 		mEntity.hostname= HttpFunc.getHosts();
-		mEntity.states= WorkStateEntity.finsh;
+		mEntity.states= WorkState.finsh;
 		mEntity.hash= HashFunc.HashFunc(url);
 		mEntity.timestamp=timestamp;
 	}
 
 	@Override
-	public void addFailedDistributionUrl(String url, String errormessage, int states) {
+	public void updateErrorToFinshUrl(String url, int errorstate, String errormessage) {
+		WorkEntity mEntity=finishurls.get(url);
+	}
 
+	@Override
+	public void addFailedDistributionUrl(String url, String errormessage, int states) {
+		WorkEntity mEntity=new WorkEntity();
+		mEntity.url=url;
+		mEntity.hostname= HttpFunc.getHosts();
+		mEntity.states= WorkState.finsh;
+		mEntity.hash= HashFunc.HashFunc(url);
+		mEntity.errormessage=errormessage;
+		mEntity.states=states;
 	}
 
 	@Override
@@ -111,9 +121,7 @@ public class WorkProcess implements DistributionScheduler{
 
 	@Override
 	public void onFinish() {
-
 	}
-
 
 	public List<WorkEntity> getFinishUrls()
 	{

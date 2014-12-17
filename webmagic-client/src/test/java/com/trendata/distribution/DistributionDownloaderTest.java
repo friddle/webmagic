@@ -1,6 +1,7 @@
 package com.trendata.distribution;
 
 import junit.framework.TestCase;
+import org.apache.http.HttpHost;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Task;
@@ -35,7 +36,9 @@ public class DistributionDownloaderTest extends TestCase {
 
 			@Override
 			public Site getSite() {
-				return Site.me();
+				Site mSite=Site.me();
+				mSite.setHttpProxy(new HttpHost("127.0.0.1",8087));
+				return mSite;
 			}
 		};
 		downloader.download(mRequest,mTask);

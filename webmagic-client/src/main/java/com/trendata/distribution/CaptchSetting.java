@@ -4,7 +4,7 @@ import us.codecraft.webmagic.selector.Html;
 
 /**
  * Created by friddle on 12/15/14.
- * captch must be the String or FileObject
+ * if output of the url is codeing.
  */
 public interface CaptchSetting {
 	public boolean isCaptchUrl(String url);

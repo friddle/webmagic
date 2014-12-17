@@ -3,7 +3,7 @@ package com.trendata.entity;
 /**
  * Created by friddle on 12/10/14.
  */
-public class WorkStateEntity {
+public class WorkState {
 	public final static int begin=0;
 	public final static int run=1;
 	public final static int finsh=3;

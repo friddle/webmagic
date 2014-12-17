@@ -3,6 +3,7 @@ package com.trendata.distribution;
 import com.google.common.collect.Sets;
 import com.trendata.entity.ErrorType;
 import com.trendata.util.Constant;
+import com.trendata.util.ErrorFunc;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
@@ -138,7 +139,8 @@ public class DistributionDownloader extends AbstractDownloader {
                 onSuccess(request);
                 return page;
             } else {
-				onError(request);
+				request.putExtra(Constant.ErrorType, ErrorFunc.getErrorTypeByStates(statusCode));
+	     		onError(request);
                 logger.warn("code error " + statusCode + "\t" + request.getUrl());
                 return null;
             }
@@ -147,6 +149,8 @@ public class DistributionDownloader extends AbstractDownloader {
             if (site.getCycleRetryTimes() > 0) {
                 return addToCycleRetry(request, site);
             }
+			request.putExtra(Constant.ErrorType,ErrorFunc.getErrorTypeByException(e));
+			request.putExtra(Constant.ExtraErrorMessage,e.getMessage());
             onError(request);
             return null;
         } finally {
@@ -162,6 +166,10 @@ public class DistributionDownloader extends AbstractDownloader {
         }
     }
 
+	public void checkHttpProxy(HttpHost host,Long timeout)
+	{
+
+	}
 	public void onError(Request request)
 	{
 		listener.onError(request);

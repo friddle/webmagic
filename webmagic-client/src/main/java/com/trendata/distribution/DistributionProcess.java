@@ -18,6 +18,10 @@ public abstract class DistributionProcess implements PageProcessor {
     public List<DistributionPipeline> pipelines;
 	public ConcurrentLinkedQueue<String> urls=new ConcurrentLinkedQueue<String>();
 	public void setSite(Site site) {this.site=site;}
+	public Site getSite()
+	{
+		return this.site;
+	}
     public void addPipeline(DistributionPipeline pipeline)
     {
        pipelines.add(pipeline);
@@ -39,9 +43,5 @@ public abstract class DistributionProcess implements PageProcessor {
 	public void onfailed(String url,String message,int code)
 	{
 		this.scheduler.updateErrorToFinshUrl(url,code,message);
-	}
-	public void onfinish()
-	{
-		this.scheduler.onFinish();
 	}
 }
